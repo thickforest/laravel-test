@@ -1,5 +1,5 @@
-// >>> php artisan make:controller PostController --resource
 <?php
+// >>> php artisan make:controller PostController --resource
 
 namespace App\Http\Controllers;
 
