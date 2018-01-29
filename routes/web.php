@@ -39,3 +39,7 @@ Route::post('/test_submit', function(Request $request) {
 	return redirect(route('tform'))->withInput($request->except('password'))->with("error_msg","error message");
     }
 });
+
+
+Route::get('post/create', 'PostController@create');
+Route::post('post', 'PostController@store');
