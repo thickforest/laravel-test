@@ -1,4 +1,7 @@
 <?php
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,4 +16,26 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/test', function(Request $request) {
+    $uri = $request->path();
+    return Response(["test page", $uri], 200)->header('Content-Type', 'text/plain');
+});
+
+
+Route::get('/test_form', function(Request $request) {
+    return view('form');
+})->name('tform');
+
+Route::post('/test_submit', function(Request $request) {
+    if($request->input('username') == 'lvzhl') {
+        if(!View::exists('xxxx')) {
+            return "save to db";
+	}
+    } else {
+        //return back()->withInput();
+	//return redirect('/test_form')->withInput($request->except('password'));
+	return redirect(route('tform'))->withInput($request->except('password'))->with("error_msg","error message");
+    }
 });
